@@ -68,7 +68,7 @@ class LottoGame{
         (this.counts.first * 2000000000);
         
         const earningsRate = earnings / money;
-        const roundedearningsRate = parseFloat(earningsRate.toFixed(2));
+        const roundedearningsRate = parseFloat(earningsRate.toFixed(1));
         return roundedearningsRate;
     }
 }
