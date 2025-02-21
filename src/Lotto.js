@@ -1,5 +1,8 @@
+import { Random } from "@woowacourse/mission-utils";
+
+//로또 번호 저장, 검증, 반환 
 class Lotto {
-  #numbers;
+  #numbers; //받은 로또 번호리스트
 
   constructor(numbers) {
     this.#validate(numbers);
@@ -12,7 +15,9 @@ class Lotto {
     }
   }
 
-  // TODO: 추가 기능 구현
+  getNumbers(){
+    return this.#numbers
+  }
 }
 
 export default Lotto;
