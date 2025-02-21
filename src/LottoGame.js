@@ -67,7 +67,7 @@ class LottoGame{
         (this.counts.third * 30000000) + 
         (this.counts.first * 2000000000);
         
-        const earningsRate = earnings / money;
+        const earningsRate = (earnings / money) * 100 ;
         const roundedearningsRate = parseFloat(earningsRate.toFixed(1));
         return roundedearningsRate;
     }
