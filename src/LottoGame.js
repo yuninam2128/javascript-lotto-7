@@ -4,6 +4,7 @@ import Lotto from "../src/Lotto.js";
 class LottoGame{
     constructor(){
         this.winningLottos = []
+        this.counts = {first : 0, second : 0, third: 0, fourth: 0, fifth: 0};
     }
 
     //로또 발행
@@ -18,15 +19,44 @@ class LottoGame{
     
     // userLotto 전처리 
     preprocessUserLotto(userNumbers) {
-        return userNumbers.split(",").map(num => num.trim()).map(num => Number(num));
+        userNumbers = userNumbers.split(",").map(num => num.trim()).map(num => Number(num));
+        const userLotto = new Lotto(userNumbers);
+        return userLotto.getNumbers().sort((a,b) => a - b);
     }
 
-    //로또 당첨조건 검사
-    checkLottoWinning(userLotto, winningLottos, bonusNumber) {
-        
-        // 일치하는 번호 개수 구하기 
+    // 일치하는 숫자 개수 계산
+    calculateMatchingCount(userLotto, winningLotto) {
+        return userLotto.filter(num => winningLotto.includes(num)).length;
+    }
 
-        // 보너스 번호와 일치 여부 확인 
+    // 등수 판별
+    getRank(matchingCount, bonusMatch) {
+        switch (matchingCount) {
+            case 6: return 'first';
+            case 5: return bonusMatch ? 'third' : 'second';
+            case 4: return 'fourth';
+            case 3: return 'fifth';
+            default: return null;
+        }
+    }
+
+    // 등수 반환 
+    returnRank(userLotto, winningLottos, bonusNumber){
+        let matchingCount = 0;
+        let bonusMatch = userLotto.includes(bonusNumber);
+
+        for (let i = 0; i < winningLottos.length; i++) {
+            // 일치하는 번호 개수 계산
+            matchingCount = this.calculateMatchingCount(userLotto, winningLottos[i]);
+            
+            // 등수 판별
+            let rank = this.getRank(matchingCount, bonusMatch);
+            if (rank) {
+                this.counts[rank] += 1;
+            }
+        }
+
+        return this.counts;
     }
 }
 
