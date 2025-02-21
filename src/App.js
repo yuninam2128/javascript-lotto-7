@@ -31,6 +31,8 @@ class App {
     Console.print(`5개 일치 (1,500,000원) - ${rank.second + rank.third}개`);
     Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${rank.third}개`);
     Console.print(`6개 일치 (2,000,000,000원) - ${rank.first}개`);
+    const earningRate = lottoGame.earningRate(inputMoney);
+    Console.print(`총 수익률은 ${earningRate}%입니다.`);
   }
 }
 

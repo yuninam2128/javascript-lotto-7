@@ -58,6 +58,19 @@ class LottoGame{
 
         return this.counts;
     }
+
+    //수익률 계산  (벌어들인 금액/구매 금액)
+    earningRate(money){
+        const earnings = (this.counts.fifth * 5000) + 
+        (this.counts.fourth * 50000) + 
+        (this.counts.second * 1500000) + 
+        (this.counts.third * 30000000) + 
+        (this.counts.first * 2000000000);
+        
+        const earningsRate = earnings / money;
+        const roundedearningsRate = parseFloat(earningsRate.toFixed(2));
+        return roundedearningsRate;
+    }
 }
 
 export default LottoGame;
